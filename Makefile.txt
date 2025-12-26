@@ -1,0 +1,19 @@
+SRCDIR = src
+BINDIR = bin
+
+MAIN_CLASS_NAME = SchedulingSimulation
+MAIN_CLASSFILE = $(BINDIR)/$(MAIN_CLASS).class
+
+DEPENDENCIES = DrinkOrder Barman Patron
+DEPENDENCIES_CLASSFILES = $(DEPENDENCIES:%=$(BINDIR)/%.class)
+
+$(MAIN_CLASSFILE): $(DEPENDENCIES_CLASSFILES)
+
+$(BINDIR)/%.class: $(SRCDIR)/%.java
+	javac -d "$(BINDIR)" -sourcepath "$(SRCDIR)" -cp "$(BINDIR)" $<
+
+run: $(MAIN_CLASSFILE)
+	java -cp "$(BINDIR)" $(MAIN_CLASS)
+
+clean:
+	rm $(BINDIR)/*.class
