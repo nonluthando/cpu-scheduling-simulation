@@ -57,7 +57,7 @@ The following functionality was added to the provided coursework code:
 	•	Execution time is simulated using controlled thread sleeping
 
 
-#Metrics Collected
+## Metrics Collected
 
 For each patron, the following metrics are recorded:
 	•	Turnaround Time: time from order submission to final completion
