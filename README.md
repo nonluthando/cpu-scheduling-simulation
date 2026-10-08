@@ -43,12 +43,18 @@ The scheduling policy is selected at runtime, allowing the same execution logic 
 
 ## Extensions and Contributions
 
-The following functionality was added to the provided coursework code:
-	•	Scheduling behaviour using concurrent queue selection
-	•	Thread start coordination using CountDownLatch
-	•	Metric collection for turnaround time, waiting time, and response time
-	•	File-based logging of experimental results
-	•	Repeated experimental runs under varying patron counts
+The provided starter code (M.M. Kuttel, 2024) supplied the bar-themed thread
+model — `Patron`, `DrinkOrder`, and the main simulation loop — including the
+fixed patron arrival-time logic and output format, which were left
+unmodified. The scheduling policy itself was left as a single implementation
+gap in `Barman`'s constructor (marked `FIX below` in the original code).
+
+What was implemented on top of that starter code:
+	•	The FCFS/SJF scheduling switch itself — selecting a FIFO LinkedBlockingQueue or a PriorityBlockingQueue keyed on drink execution time, based on a runtime flag
+	•	Thread start coordination using CountDownLatch, so all patrons and the barman begin together regardless of thread creation order
+	•	Metric collection for turnaround time, waiting time, and response time in `Patron`
+	•	File-based logging of per-patron results via a synchronized FileWriter
+	•	Repeated experimental runs under varying patron counts, used to produce the results below
 
 ## Concurrency and Synchronisation
 	•	All threads synchronise at startup to avoid bias from thread creation order
